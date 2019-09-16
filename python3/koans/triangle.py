@@ -18,6 +18,10 @@
 #
 def triangle(a, b, c):
     # DELETE 'PASS' AND WRITE THIS CODE
+    if a <=0 or b <=0 or c < 0:
+        raise TriangleError("All sides must be greater than zero")
+    if a + b < c or a + c < b or b + c < a:
+        raise TriangleError("The sum of any two sides should be greater than the third one")
     if a == b == c: return 'equilateral'
     elif a == b or a == c or b == c: return 'isosceles'
     else: return 'scalene'
