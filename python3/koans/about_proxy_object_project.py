@@ -23,9 +23,27 @@ class Proxy:
         # WRITE CODE HERE
 
         #initialize '_obj' attribute last. Trust me on this!
-        self._obj = target_object
+        object.__setattr__(self, '_messages',[])
+        object.__setattr__(self, '_obj', target_object)
 
     # WRITE CODE HERE
+    def __setattr__(self, name, value):
+        self._messages.append(name)
+        setattr(self._obj, name, value)
+
+    def __getattr__(self, name):
+        self._messages.append(name)
+        return getattr(self._obj, name)
+
+
+    def messages(self):
+        return self._messages
+
+    def was_called(self, name):
+        return name in self._messages
+
+    def number_of_times_called(self, name):
+        return self._messages.count(name)
 
 # The proxy object should pass the following Koan:
 #
